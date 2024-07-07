@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather APP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-container">
+        <div class="input-section">
+          <input
+            placeholder="Enter your text..."
+            class="input"
+            name="text"
+            type="text"
+            id="getValue"
+          />
+          <button class="shadow__btn">search</button>
+        </div>
+        <div class="showContent">
+          <div class="card">
+            <div class="tools">
+              <div class="circle">
+                <span class="red box"></span>
+              </div>
+              <div class="circle">
+                <span class="yellow box"></span>
+              </div>
+              <div class="circle">
+                <span class="green box"></span>
+              </div>
+            </div>
+            <div id="weather" class="card__content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
