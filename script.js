@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".shadow__btn").addEventListener("click", () => {
+    // Also add the functionality of when some presses the enter button it accepts it as a click
+
     const input = document.querySelector("#getValue");
     const inputValue = input.value;
 
     const apiKey = "e6a576257ab1111cd4e514f83fca7b84";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}`;
+
+    //Protect your api key
 
     const date = new Date();
 
@@ -19,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        inputValue.innerHTML = "kais";
 
         if (!data) {
           document.querySelector("#weather").innerText =
@@ -49,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="time">Time: ${hours}:${min}:${sec}<p/>
         `;
         }
+
+        // a bit of error in time section while at time 00:04 it shows 0:4:1.. lets solve it
       } catch (error) {
         console.error("Error fetching weather data:", error);
         document.querySelector("#weather").innerHTML =
