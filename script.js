@@ -1,20 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".shadow__btn").addEventListener("click", () => {
-    // Also add the functionality of when some presses the enter button it accepts it as a click
+  const button = document.querySelector(".shadow__btn");
+  const input = document.querySelector("#getValue");
 
-    const input = document.querySelector("#getValue");
+  const handleAction = () => {
     const inputValue = input.value;
-
     const apiKey = "e6a576257ab1111cd4e514f83fca7b84";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}`;
 
-    //Protect your api key
-
+    // Protect your API key
     const date = new Date();
-
-    const hours = date.getHours();
-    const min = date.getMinutes();
-    const sec = date.getSeconds();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const min = String(date.getMinutes()).padStart(2, "0");
+    const sec = String(date.getSeconds()).padStart(2, "0");
 
     async function getWeather() {
       try {
@@ -31,36 +28,39 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector(
             "#weather"
           ).innerHTML = `<div class="background"> 
-        <h1>Name:  ${data.name}</h1>         
-
-
+            <h1>Name: ${data.name}</h1>         
             <div class="sec-back">
-
-             <div class="third">
-             <p>Country: ${data.sys.country}<p/>   <p>Temperature: ${data.main.temp} <p/> 
-             </div> 
-
-
-            <div class="fourth">
-             <p>Wind speed: ${data.wind.speed} <p/>   <p>description: ${data.weather[0].description} <p/>
-            </div>
-
-
-          </div> 
-        </div>
-        
-        <p class="time">Time: ${hours}:${min}:${sec}<p/>
-        `;
+              <div class="third">
+                <p>Country: ${data.sys.country}</p>   
+                <p>Temperature: ${data.main.temp}</p> 
+              </div> 
+              <div class="fourth">
+                <p>Wind speed: ${data.wind.speed}</p>   
+                <p>Description: ${data.weather[0].description}</p>
+              </div>
+            </div> 
+          </div>
+          <p class="time">Time: ${hours}:${min}:${sec}</p>
+          `;
         }
-
-        // a bit of error in time section while at time 00:04 it shows 0:4:1.. lets solve it
       } catch (error) {
         console.error("Error fetching weather data:", error);
         document.querySelector("#weather").innerHTML =
           "<center>Failed to fetch weather data. Please try again later!</center>";
       }
     }
+
     getWeather();
     input.value = "";
+  };
+
+  // Add click event listener
+  button.addEventListener("click", handleAction);
+
+  // Add keydown event listener
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      handleAction();
+    }
   });
 });
