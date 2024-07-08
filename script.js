@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const apiKey = "e6a576257ab1111cd4e514f83fca7b84";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}`;
 
-    // Protect your API key
     const date = new Date();
     const hours = String(date.getHours()).padStart(2, "0");
     const min = String(date.getMinutes()).padStart(2, "0");
@@ -54,10 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = "";
   };
 
-  // Add click event listener
   button.addEventListener("click", handleAction);
 
-  // Add keydown event listener
   document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       handleAction();
